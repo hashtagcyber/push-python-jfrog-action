@@ -1,13 +1,3 @@
-<style>
-  .note {
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f8f8f8;
-    color: black;
-    border-radius: 5px;
-  }
-</style>
-
 # push-python-jfrog-action
 Example action to push python packages to JFrog using custom defaults. Allows dev teams to use the action without configuration.
 
@@ -19,9 +9,10 @@ Example action to push python packages to JFrog using custom defaults. Allows de
     - Update the logic in entrypoint.sh and action.yml to generate the correct repository name.
     - Delete the "default" value in action.yml. This will force teams to enter their artifactory repo name.
 5. Profit
-<div class="note">
-  <strong>Note: </strong>If your artifactory repository name requires a '/', you MUST edit the logic in entrypoint.sh
-</div>
+
+**Warning**
+If your artifactory repository name requires a '/', you MUST edit the logic in entrypoint.sh
+
 
 ### Create a workflow in your org using this action
 1. Follow the steps above to expose the action
