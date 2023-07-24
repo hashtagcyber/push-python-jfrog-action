@@ -1,0 +1,28 @@
+# action.yml
+name: 'Push to Artifactory'
+description: 'Leverages Github Secrets and Twine to push to private Artifactory server.'
+inputs:
+  artifactory-user:
+    description: 'Artifactory username. Get one here: <link to where to get one>'
+    required: true
+    default: ${{ secrets.ARTIFACTORY_USER }}
+  artifactory-token:
+    description: 'Artifactory Acccess Token'
+    required: true
+    default: "${{ secrets.ARTIFACTORY_TOKEN }}"
+  artifactory-url:
+    description: 'Base URL for artifactory instance'
+    required: true
+    default: 'https://hashtagcyber.jfrog.io/artifactory/'
+  artifactory-repo:
+    description: 'Artifactory Repo to upload package to'
+    required: true
+    default: "${{ env.GITHUB_REPOSITORY }}"
+  package-path:
+    description: 'Path to the package artifact we want to upload'
+    required: true
+    default: "dist/*"
+  
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
