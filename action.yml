@@ -5,15 +5,13 @@ inputs:
   artifactory-user:
     description: 'Artifactory username. Get one here: <link to where to get one>'
     required: true
-    default: ${{ secrets.ARTIFACTORY_USER }}
   artifactory-token:
     description: 'Artifactory Acccess Token'
     required: true
-    default: "${{ secrets.ARTIFACTORY_TOKEN }}"
   artifactory-url:
-    description: 'Base URL for artifactory instance'
+    description: 'Base URL for artifactory instance. Do NOT include repository in path'
     required: true
-    default: 'https://hashtagcyber.jfrog.io/artifactory/'
+    default: ''
   artifactory-repo:
     description: 'Artifactory Repo to upload package to'
     required: true
@@ -26,3 +24,9 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - {{ inputs.artifactory-user }}
+    - {{ inputs.artifactory-token }}
+    - {{ inputs.artifactory-url }}
+    - {{ inputs.artifactory-repo }}
+    - {{ inputs.package-path }}

@@ -8,7 +8,9 @@ Example action to push python packages to JFrog using custom defaults. Allows de
 4. The artifactory-repo input assumes that your artifactory repository and github repository will have the same name. If that is not the case, you have two choices:
     - Update the logic in entrypoint.sh and action.yml to generate the correct repository name.
     - Delete the "default" value in action.yml. This will force teams to enter their artifactory repo name.
-5. Profit
+5. Go into your repository settings and enable other repositories in the org/enterprise to use this action.
+6. Tag the current branch with something like 'v1.0.0' so that teams don't have to include your commit hash in their workflow file.
+7. Profit
 
 **Warning**
 If your artifactory repository name requires a '/', you MUST edit the logic in entrypoint.sh
@@ -36,7 +38,8 @@ jobs:
     name: Build, Test, Publish
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout Repo
+      uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -58,5 +61,5 @@ jobs:
         coverage run -m unittest discover -v && coverage report -m --skip-empty --omit 'tests/*' --fail-under=75 
     - name: Publish to Artifactory
       if: startsWith(github.ref, 'refs/tags')
-      uses: hashtagcyber/push-python-jfrog-action
+      uses: <path to your action>
 ```
