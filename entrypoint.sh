@@ -11,5 +11,5 @@ fi
 export TWINE_USERNAME="$1"
 export TWINE_PASSWORD="$2"
 export TWINE_NON_INTERACTIVE=1
-export TWINE_REPOSITORY_URL="$3/api/pypi/$4"
+export TWINE_REPOSITORY_URL="$3/api/pypi/$ARTIFACTORY_REPO"
 twine upload $5
